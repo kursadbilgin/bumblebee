@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "b247fd06-e724-4892-8e3d-a74db0c12e83",
+		"name": "bumblebee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "convert-link-to-deeplink",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"web_url\": \"https://www.trendyol.com/sr?q=%C3%BCt%C3%BC\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/v1/api/convert-link-to-deeplink"
+			},
+			"response": []
+		},
+		{
+			"name": "convert-deeplink-to-link",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deep_link\": \"ty://?Page=Product&ContentId=1925865\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/v1/api/convert-deeplink-to-link"
+			},
+			"response": []
+		}
+	]
+}

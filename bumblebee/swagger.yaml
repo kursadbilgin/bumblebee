@@ -1,0 +1,124 @@
+swagger: "2.0"
+info:
+  description: "Bumblebee"
+  version: "0.0.1"
+  title: "Link Converter Service"
+host: "localhost:8080"
+basePath: "/v1/api"
+schemes:
+  - "http"
+  - "https"
+
+paths:
+
+  /convert-link-to-deeplink:
+    post:
+      tags:
+        - "LinkToDeepLink"
+      summary: "Convert link to deep link"
+      description: "Convert link to deep link"
+      operationId: "convertLinkToDeepLink"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          description: "Convert Link To Deep Link Request"
+          required: true
+          schema:
+            $ref: "#/definitions/ConverterWebToDeepLinkRequest"
+      responses:
+        "400":
+          description: "error response"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "200":
+          description: "Convert Web Link"
+          schema:
+            $ref: "#/definitions/ResponseWebToDeep"
+
+  /convert-deeplink-to-link:
+      post:
+        tags:
+          - "DeepLinkToLink"
+        summary: "Convert deep link to link"
+        description: "Convert deep link to link"
+        operationId: "convertDeepLinkToLink"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        parameters:
+          - in: body
+            name: body
+            description: "Convert Deep Link To Link Request"
+            required: true
+            schema:
+              $ref: "#/definitions/ConverterDeepLinkToWebRequest"
+        responses:
+          "400":
+            description: "error response"
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+          "200":
+            description: "Convert Deep Link"
+            schema:
+              $ref: "#/definitions/ResponseDeepToWeb"
+
+
+definitions:
+  ErrorResponse:
+    type: object
+    properties:
+      status:
+        type: "integer"
+        format: "int32"
+        enum:
+          - 400
+      error_message:
+        description: "error message"
+        type: string
+
+  ConverterWebToDeepLinkRequest:
+    type: "object"
+    properties:
+      web_url:
+        type: "string"
+    required:
+      - web_url
+    example:
+      web_url: "https://www.trendyol.com/casio/saat-p-1925865?boutiqueId=439892&merchantId=105064"
+
+  ResponseWebToDeep:
+    type: "object"
+    properties:
+      status:
+        type: "integer"
+        format: "int32"
+        enum:
+          - 200
+      deep_link:
+        type: "string"
+
+  ConverterDeepLinkToWebRequest:
+    type: "object"
+    properties:
+      deep_link:
+        type: "string"
+    required:
+      - deep_link
+    example:
+      deep_link: "ty://?Page=Product&ContentId=1925865&CampaignId=439892&MerchantId=105064"
+
+  ResponseDeepToWeb:
+    type: "object"
+    properties:
+      status:
+        type: "integer"
+        format: "int32"
+        enum:
+          - 200
+      web_link:
+        type: "string"
